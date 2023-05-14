@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="makeev"/>
+
+<!--    заполнение полей из файла проперти:-->
+        <context:property-placeholder location="musicPlayer.properties"/>
+
+<!--&lt;!&ndash;    <bean id="testBean"&ndash;&gt;-->
+<!--&lt;!&ndash;          class="makeev.TestBean">&ndash;&gt;-->
+<!--&lt;!&ndash;        <constructor-arg value="Evgeniy"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </bean>&ndash;&gt;-->
+
+<!--    <bean id="rock"-->
+<!--          class="makeev.RockMusic">-->
+<!--    </bean>-->
+
+<!--    <bean id="classic"-->
+<!--          class="makeev.ClassicalMusic"-->
+<!--          factory-method="getClassicalMusic"-->
+<!--          init-method="doMyInit"-->
+<!--          destroy-method="doMyDestroy">-->
+<!--    </bean>-->
+
+<!--    <bean id="rap"-->
+<!--          class="makeev.RapMusic">-->
+<!--    </bean>-->
+
+<!--&lt;!&ndash;    Внедрение зависимостей через конструктор&ndash;&gt;-->
+<!--&lt;!&ndash;    <bean id="musicPlayer"&ndash;&gt;-->
+<!--&lt;!&ndash;          class="makeev.MusicPlayer">&ndash;&gt;-->
+<!--&lt;!&ndash;        <constructor-arg ref="musicBean"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </bean>&ndash;&gt;-->
+
+<!--    &lt;!&ndash;    Внедрение зависимостей через setter&ndash;&gt;-->
+<!--&lt;!&ndash;        <bean id="musicPlayer"&ndash;&gt;-->
+<!--&lt;!&ndash;              class="makeev.MusicPlayer">&ndash;&gt;-->
+<!--&lt;!&ndash;            <property name="music" ref="musicBean"/>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <property name="name" value="SuperPuperPlayer"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <property name="volume" value="50"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <property name="name" value = "${musicPlayer.name}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            <property name="volume" value="${musicPlayer.volume}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        </bean>&ndash;&gt;-->
+
+    <bean id="musicPlayer" class="makeev.MusicPlayer" scope="prototype">
+        <property name="musicList">
+            <list>
+                <ref bean="rockMusic"/>
+                <ref bean="rapMusic"/>
+                <ref bean="classicalMusic"/>
+            </list>
+        </property>
+        <property name="name" value = "${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
+    </bean>
+
+</beans>
